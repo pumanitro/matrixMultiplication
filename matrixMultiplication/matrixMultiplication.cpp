@@ -33,6 +33,21 @@ int main()
 	fscanf(firstMatrixFile, "%d", &SMRowLenght);
 	fscanf(firstMatrixFile, "%d", &SMColumnLenght);
 
+	//Alokacja pamiêci
+	//First matrix
+	float **firstMatrix = (float **)malloc(FMRowLenght*sizeof(float *));
+	for (int i = 0; i < FMColumnLenght; i++)
+	{
+		firstMatrix[i] = (float *)malloc(FMColumnLenght*sizeof(float));
+	}
+
+	//Second matrix
+	float **secondMatrix = (float **)malloc(SMRowLenght*sizeof(float *));
+	for (int i = 0; i < SMColumnLenght; i++)
+	{
+		secondMatrix[i] = (float *)malloc(SMColumnLenght*sizeof(float));
+	}
+
 	//Czytanie po ca³ych plikach
 	while (fscanf(firstMatrixFile, "%f", &test)!=EOF)
 	{
