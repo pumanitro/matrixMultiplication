@@ -72,6 +72,21 @@ int main()
 
 	//fprintf(fp, "%s", tekst); /* zapisz nasz ³añcuch w pliku */
 
+	//Zwolnienie pamiêci
+	//First matrix
+	for (int i = 0; i < FMRows; i++)
+	{
+		free(firstMatrix[i]);
+	}
+	free(firstMatrix);
+
+	//Second matrix
+	for (int i = 0; i < SMRows; i++)
+	{
+		free(secondMatrix[i]);
+	}
+	free(secondMatrix);
+
 	//Zamkniêcie plików
 	fclose(firstMatrixFile); 
 	fclose(secondMatrixFile);
