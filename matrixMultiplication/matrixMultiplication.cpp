@@ -8,13 +8,14 @@
 
 int main()
 {
-	//Czytanie z pliku
+	//###Czytanie z pliku###
+
 	//Deklaracja plików
 	FILE *firstMatrixFile, *secondMatrixFile, *outputFile;
 
 	//Zmienne do danych z plików {FM - FirstMatrix | SM - SecondMatrix}
-	int FMRowLenght, FMColumnLenght, SMRowLenght, SMColumnLenght;
-	char test[5];
+	int FMRowLenght=0, FMColumnLenght=0, SMRowLenght=0, SMColumnLenght=0;
+	float test=0;
 
 	//Otwarcie plików do odczytu 
 	if ((firstMatrixFile = fopen("firstMatrixFile.txt", "r")) == NULL) {
@@ -26,10 +27,16 @@ int main()
 		exit(1);
 	}
 
+	//Okreœlenie d³ugoœci wierszy i kolumn
+	fscanf(firstMatrixFile, "%d", &FMRowLenght);
+	fscanf(firstMatrixFile, "%d", &FMColumnLenght);
+	fscanf(firstMatrixFile, "%d", &SMRowLenght);
+	fscanf(firstMatrixFile, "%d", &SMColumnLenght);
+
 	//Czytanie po ca³ych plikach
-	while (fscanf(firstMatrixFile, "%s", test)!=EOF)
+	while (fscanf(firstMatrixFile, "%f", &test)!=EOF)
 	{
-		printf("%s", test);
+		printf("%f\n", test);
 	}
 
 	//fprintf(fp, "%s", tekst); /* zapisz nasz ³añcuch w pliku */
