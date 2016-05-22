@@ -39,7 +39,7 @@ int matrixMultiplication(float **firstMatrix, float **secondMatrix, int FMRows, 
 				out += firstMatrix[i][x] * secondMatrix[x][j];
 			}
 			resultMatrix[i][j] = out;
-			printf("%.2f", resultMatrix[i][j]);
+			printf("%.2f ", resultMatrix[i][j]);
 		}
 		printf("\n");
 	}
@@ -118,7 +118,7 @@ int main()
 	}
 
 	//MNO¯ENIE
-	float **resultMatrix;
+	float **resultMatrix = 0;
 	matrixMultiplication(firstMatrix, secondMatrix, FMRows, FMColumns, SMRows, SMColumns, resultMatrix);
 
 	//fprintf(fp, "%s", tekst); /* zapisz nasz ³añcuch w pliku */
