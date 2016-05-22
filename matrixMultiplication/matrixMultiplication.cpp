@@ -22,7 +22,7 @@ int main()
 		printf("Nie mogê otworzyæ pliku firstMatrixFile.txt!\n");
 		exit(1);
 	}
-	else if ((firstMatrixFile = fopen("secondMatrixFile.txt", "r")) == NULL) {
+	if ((secondMatrixFile = fopen("secondMatrixFile.txt", "r")) == NULL) {
 		printf("Nie mogê otworzyæ pliku secondMatrixFile.txt!\n");
 		exit(1);
 	}
@@ -30,8 +30,8 @@ int main()
 	//Okreœlenie d³ugoœci wierszy i kolumn
 	fscanf(firstMatrixFile, "%d", &FMRowLenght);
 	fscanf(firstMatrixFile, "%d", &FMColumnLenght);
-	fscanf(firstMatrixFile, "%d", &SMRowLenght);
-	fscanf(firstMatrixFile, "%d", &SMColumnLenght);
+	fscanf(secondMatrixFile, "%d", &SMRowLenght);
+	fscanf(secondMatrixFile, "%d", &SMColumnLenght);
 
 	//Alokacja pamiêci
 	//First matrix
@@ -48,17 +48,23 @@ int main()
 		secondMatrix[i] = (float *)malloc(SMColumnLenght*sizeof(float));
 	}
 
-	//Czytanie po ca³ych plikach
-	while (fscanf(firstMatrixFile, "%f", &test)!=EOF)
+	//Czytanie po ca³ych plikach i zapisanie danych do odpowiednich zmiennych
+	for (int i = 0; i < FMRowLenght; i++)
 	{
-		printf("%f\n", test);
+		for (int j = 0; i < FMColumnLenght; j++)
+		{
+			fscanf(firstMatrixFile, "%f", &firstMatrix[i][j]);
+			printf("%f ", firstMatrix[i][j]);
+		}
+		printf("\n");
 	}
 
 	//fprintf(fp, "%s", tekst); /* zapisz nasz ³añcuch w pliku */
-	fclose(firstMatrixFile); /* zamknij plik */
 
+	//Zamkniêcie plików
+	fclose(firstMatrixFile); 
+	fclose(secondMatrixFile);
 
-	printf("Pierwszy program w tym roku xD\n");
 	system("pause");
     return 0;
 }
