@@ -51,7 +51,7 @@ int main()
 	//Czytanie po ca³ych plikach i zapisanie danych do odpowiednich zmiennych
 	for (int i = 0; i < FMRowLenght; i++)
 	{
-		for (int j = 0; i < FMColumnLenght; j++)
+		for (int j = 0; j < FMColumnLenght; j++)
 		{
 			fscanf(firstMatrixFile, "%f", &firstMatrix[i][j]);
 			printf("%f ", firstMatrix[i][j]);
