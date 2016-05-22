@@ -14,8 +14,7 @@ int main()
 	FILE *firstMatrixFile, *secondMatrixFile, *outputFile;
 
 	//Zmienne do danych z plików {FM - FirstMatrix | SM - SecondMatrix}
-	int FMRowLenght=0, FMColumnLenght=0, SMRowLenght=0, SMColumnLenght=0;
-	float test=0;
+	int FMRows=0, FMColumns=0, SMRows=0, SMColumns=0;
 
 	//Otwarcie plików do odczytu 
 	if ((firstMatrixFile = fopen("firstMatrixFile.txt", "r")) == NULL) {
@@ -28,33 +27,45 @@ int main()
 	}
 
 	//Okreœlenie d³ugoœci wierszy i kolumn
-	fscanf(firstMatrixFile, "%d", &FMRowLenght);
-	fscanf(firstMatrixFile, "%d", &FMColumnLenght);
-	fscanf(secondMatrixFile, "%d", &SMRowLenght);
-	fscanf(secondMatrixFile, "%d", &SMColumnLenght);
+	fscanf(firstMatrixFile, "%d", &FMRows);
+	fscanf(firstMatrixFile, "%d", &FMColumns);
+	fscanf(secondMatrixFile, "%d", &SMRows);
+	fscanf(secondMatrixFile, "%d", &SMColumns);
 
 	//Alokacja pamiêci
 	//First matrix
-	float **firstMatrix = (float **)malloc(FMRowLenght*sizeof(float *));
-	for (int i = 0; i < FMColumnLenght; i++)
+	float **firstMatrix = (float **)malloc(FMRows*sizeof(float *));
+	for (int i = 0; i < FMColumns; i++)
 	{
-		firstMatrix[i] = (float *)malloc(FMColumnLenght*sizeof(float));
+		firstMatrix[i] = (float *)malloc(FMColumns*sizeof(float));
 	}
 
 	//Second matrix
-	float **secondMatrix = (float **)malloc(SMRowLenght*sizeof(float *));
-	for (int i = 0; i < SMColumnLenght; i++)
+	float **secondMatrix = (float **)malloc(SMRows*sizeof(float *));
+	for (int i = 0; i < SMColumns; i++)
 	{
-		secondMatrix[i] = (float *)malloc(SMColumnLenght*sizeof(float));
+		secondMatrix[i] = (float *)malloc(SMColumns*sizeof(float));
 	}
 
 	//Czytanie po ca³ych plikach i zapisanie danych do odpowiednich zmiennych
-	for (int i = 0; i < FMRowLenght; i++)
+	//First Matrix
+	for (int i = 0; i < FMRows; i++)
 	{
-		for (int j = 0; j < FMColumnLenght; j++)
+		for (int j = 0; j < FMColumns; j++)
 		{
 			fscanf(firstMatrixFile, "%f", &firstMatrix[i][j]);
 			printf("%f ", firstMatrix[i][j]);
+		}
+		printf("\n");
+	}
+
+	//Second Matrix
+	for (int i = 0; i < SMRows; i++)
+	{
+		for (int j = 0; j < SMColumns; j++)
+		{
+			fscanf(secondMatrixFile, "%f", &secondMatrix[i][j]);
+			printf("%f ", secondMatrix[i][j]);
 		}
 		printf("\n");
 	}
