@@ -35,14 +35,14 @@ int main()
 	//Alokacja pamiêci
 	//First matrix
 	float **firstMatrix = (float **)malloc(FMRows*sizeof(float *));
-	for (int i = 0; i < FMColumns; i++)
+	for (int i = 0; i < FMRows; i++)
 	{
 		firstMatrix[i] = (float *)malloc(FMColumns*sizeof(float));
 	}
 
 	//Second matrix
 	float **secondMatrix = (float **)malloc(SMRows*sizeof(float *));
-	for (int i = 0; i < SMColumns; i++)
+	for (int i = 0; i < SMRows; i++)
 	{
 		secondMatrix[i] = (float *)malloc(SMColumns*sizeof(float));
 	}
