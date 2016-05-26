@@ -155,6 +155,13 @@ int main()
 	}
 	free(secondMatrix);
 
+	//Output matrix
+	for (int i = 0; i < RMRows; i++)
+	{
+		free(resultMatrix[i]);
+	}
+	free(resultMatrix);
+
 	//Zamkniêcie plików
 	fclose(firstMatrixFile);
 	fclose(secondMatrixFile);
