@@ -8,20 +8,20 @@
 //0 - podanych macierzy nie mo¿na pomno¿yæ
 //1 - wszystko posz³o zgodnie z planem - macierz pomno¿ona
 //RM - ResultMatrix
-int matrixMultiplication(float **firstMatrix, float **secondMatrix, int FMRows, int FMColumns, int SMRows, int SMColumns, float **resultMatrix)
+int matrixMultiplication(float **firstMatrix, float **secondMatrix, int FMRows, int FMColumns, int SMRows, int SMColumns, float **&resultMatrix, int *RMRows, int *RMColumns)
 {
 	//Sprawdzenie czy macierze mo¿na mno¿yæ
 	if (FMColumns != SMRows) return 0;
 
 	//Stworzenie wymiarów nowej macierzy
-	int RMRows = FMRows;
-	int RMColumns = SMColumns;
+	*RMRows = FMRows;
+	*RMColumns = SMColumns;
 
 	//Alokacja pamiêci nowej macierzy
-	resultMatrix = (float **)malloc(RMRows*sizeof(float *));
-	for (int i = 0; i < RMRows; i++)
+	resultMatrix = (float **)malloc(*RMRows*sizeof(float *));
+	for (int i = 0; i < *RMRows; i++)
 	{
-		resultMatrix[i] = (float *)malloc(RMColumns*sizeof(float));
+		resultMatrix[i] = (float *)malloc(*RMColumns*sizeof(float));
 	}
 
 	//Przypisanie wartoœci do zaalokowanej tablicy
@@ -29,9 +29,9 @@ int matrixMultiplication(float **firstMatrix, float **secondMatrix, int FMRows, 
 	int link = FMColumns;
 	float out;
 
-	for (int i = 0; i < RMRows; i++)
+	for (int i = 0; i < *RMRows; i++)
 	{
-		for (int j = 0; j < RMColumns; j++)
+		for (int j = 0; j < *RMColumns; j++)
 		{
 			out = 0;
 			for (int x = 0; x < link; x++)
@@ -119,7 +119,24 @@ int main()
 
 	//MNO¯ENIE
 	float **resultMatrix = 0;
-	matrixMultiplication(firstMatrix, secondMatrix, FMRows, FMColumns, SMRows, SMColumns, resultMatrix);
+	int RMRows = 0, RMColumns = 0;
+	matrixMultiplication(firstMatrix, secondMatrix, FMRows, FMColumns, SMRows, SMColumns, resultMatrix, &RMRows, &RMColumns);
+
+	//Zapisanie wyniku do pliku
+	//Wpisanie wymiarów macierzy do pliku
+	fprintf(outputFile, "%d ", RMRows);
+	fprintf(outputFile, "%d\n", RMColumns);
+
+	//Zapisanie zawartoœæ macierzy
+	for (int i = 0; i < RMRows; i++)
+	{
+		for (int j = 0; j < RMColumns; j++)
+		{
+			//TODO: THIS PART DONT WORK
+			fprintf(outputFile, "%.2f ", resultMatrix[i][j]);
+		}
+		fprintf(outputFile, "\n");
+	}
 
 	//fprintf(fp, "%s", tekst); /* zapisz nasz ³añcuch w pliku */
 
@@ -138,9 +155,17 @@ int main()
 	}
 	free(secondMatrix);
 
+	//Output matrix
+	for (int i = 0; i < RMRows; i++)
+	{
+		free(resultMatrix[i]);
+	}
+	free(resultMatrix);
+
 	//Zamkniêcie plików
-	fclose(firstMatrixFile); 
+	fclose(firstMatrixFile);
 	fclose(secondMatrixFile);
+	fclose(outputFile);
 
 	system("pause");
     return 0;
