@@ -8,7 +8,7 @@
 //0 - podanych macierzy nie mo¿na pomno¿yæ
 //1 - wszystko posz³o zgodnie z planem - macierz pomno¿ona
 //RM - ResultMatrix
-int matrixMultiplication(float **firstMatrix, float **secondMatrix, int FMRows, int FMColumns, int SMRows, int SMColumns, float **resultMatrix, float *RMRows, float *RMColumns)
+int matrixMultiplication(float **firstMatrix, float **secondMatrix, int FMRows, int FMColumns, int SMRows, int SMColumns, float **&resultMatrix, int *RMRows, int *RMColumns)
 {
 	//Sprawdzenie czy macierze mo¿na mno¿yæ
 	if (FMColumns != SMRows) return 0;
@@ -118,14 +118,14 @@ int main()
 	}
 
 	//MNO¯ENIE
-	float **resultMatrix;
-	float RMRows = 0, RMColumns = 0;
+	float **resultMatrix = 0;
+	int RMRows = 0, RMColumns = 0;
 	matrixMultiplication(firstMatrix, secondMatrix, FMRows, FMColumns, SMRows, SMColumns, resultMatrix, &RMRows, &RMColumns);
 
 	//Zapisanie wyniku do pliku
 	//Wpisanie wymiarów macierzy do pliku
 	fprintf(outputFile, "%d ", RMRows);
-	fprintf(outputFile, "%d", RMColumns);
+	fprintf(outputFile, "%d\n", RMColumns);
 
 	//Zapisanie zawartoœæ macierzy
 	for (int i = 0; i < RMRows; i++)
@@ -133,7 +133,7 @@ int main()
 		for (int j = 0; j < RMColumns; j++)
 		{
 			//TODO: THIS PART DONT WORK
-			fprintf(outputFile, "%.2f", RMRows);
+			fprintf(outputFile, "%.2f ", resultMatrix[i][j]);
 		}
 		fprintf(outputFile, "\n");
 	}
