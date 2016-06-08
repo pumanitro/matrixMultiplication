@@ -118,22 +118,22 @@ int main()
 	}
 
 	//MNO¯ENIE
-	float **resultMatrix = 0;
+	float **resultMatrix;
 	float RMRows = 0, RMColumns = 0;
 	matrixMultiplication(firstMatrix, secondMatrix, FMRows, FMColumns, SMRows, SMColumns, resultMatrix, &RMRows, &RMColumns);
 
 	//Zapisanie wyniku do pliku
-	//Wymiary macierzy
+	//Wpisanie wymiarów macierzy do pliku
 	fprintf(outputFile, "%d ", RMRows);
 	fprintf(outputFile, "%d", RMColumns);
 
-	//Zawartoœæ macierzy
+	//Zapisanie zawartoœæ macierzy
 	for (int i = 0; i < RMRows; i++)
 	{
 		for (int j = 0; j < RMColumns; j++)
 		{
 			//TODO: THIS PART DONT WORK
-			fprintf(outputFile, "%.2f", resultMatrix[0][1]);
+			fprintf(outputFile, "%.2f", RMRows);
 		}
 		fprintf(outputFile, "\n");
 	}
