@@ -4,8 +4,11 @@
 #include "stdafx.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string>
+#include <iostream>
 #include "Functions.h"
 
+using namespace std;
 
 int main()
 {
@@ -18,18 +21,9 @@ int main()
 	int FMRows=0, FMColumns=0, SMRows=0, SMColumns=0;
 
 	//Otwarcie plików 
-	if ((firstMatrixFile = fopen("firstMatrixFile.txt", "r")) == NULL) {
-		printf("Nie mogê otworzyæ pliku firstMatrixFile.txt!\n");
-		exit(1);
-	}
-	if ((secondMatrixFile = fopen("secondMatrixFile.txt", "r")) == NULL) {
-		printf("Nie mogê otworzyæ pliku secondMatrixFile.txt!\n");
-		exit(1);
-	}
-	if ((outputFile = fopen("resultMatrix.txt", "w")) == NULL) {
-		printf("Nie mogê otworzyæ pliku resultMatrix.txt!\n");
-		exit(1);
-	}
+	openFile(firstMatrixFile, "firstMatrixFile.txt", "r");
+	openFile(secondMatrixFile, "secondMatrixFile.txt", "r");
+	openFile(outputFile, "resultMatrixFile.txt", "w");
 
 	//Okreœlenie d³ugoœci wierszy i kolumn
 	fscanf(firstMatrixFile, "%d", &FMRows);

@@ -1,4 +1,5 @@
 #pragma once
+using namespace std;
 
 //0 - podanych macierzy nie mo¿na pomno¿yæ
 //1 - wszystko posz³o zgodnie z planem - macierz pomno¿ona
@@ -40,4 +41,16 @@ int matrixMultiplication(float **firstMatrix, float **secondMatrix, int FMRows, 
 	}
 
 	return 1;
+}
+
+//0-B³¹d wewn¹trz funkcji
+//1-Poprawnie zakoñczona funkcja
+//ErrorCode - -1 - Nie mogê utworzyæ pliku
+int openFile(FILE *&file, char name[], char type[])
+{
+	if ((file = fopen(name, type)) == NULL) {
+		std::cout << "I can't open a file " << name << endl;
+		return(0);
+	}
+	return(1);
 }
