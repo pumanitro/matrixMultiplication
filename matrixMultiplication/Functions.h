@@ -10,9 +10,11 @@ void showError(int state)
 	switch (state)
 	{
 		case ERR_OPENING_FILE:
-			std:cout << ERR_MSG_OPENING_FILE << endl;
+			std::cout << ERR_MSG_OPENING_FILE << endl;
 			break;
-
+		case ERR_GETING_ROWS_COLS_SIZE:
+			std::cout << ERR_MSG_GETING_ROWS_COLS_SIZE << endl;
+				break;
 	}
 }
 
@@ -63,5 +65,23 @@ int matrixMultiplication(float **firstMatrix, float **secondMatrix, int FMRows, 
 int openFile(FILE *&file, char name[], char type[])
 {
 	if ((file = fopen(name, type)) == NULL) return(-1);
+	return(0);
+}
+
+//0-Poprawnie zakoñczona funkcja
+//ErrorCode - -2 - Nie mogê prawid³owo odczytaæ kolumn lub wierszy
+int getRowsAndColSize(FILE *firstMatrixFile, FILE *secondMatrixFile, int *FMRows, int *FMColumns, int *SMRows, int *SMColumns)
+{
+	try {
+		fscanf(firstMatrixFile, "%d", FMRows);
+		fscanf(firstMatrixFile, "%d", FMColumns);
+		fscanf(secondMatrixFile, "%d", SMRows);
+		fscanf(secondMatrixFile, "%d", SMColumns);
+	}
+	catch (...) 
+	{ 
+		return(-2); 
+	}
+
 	return(0);
 }

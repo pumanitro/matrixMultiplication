@@ -11,6 +11,7 @@
 #include "ErrorCodes.h"
 
 using namespace std;
+#define OK 0
 
 int main()
 {
@@ -27,19 +28,15 @@ int main()
 
 	//Otwarcie plików 
 	state = openFile(firstMatrixFile, "firstMatrixFile.txt", "r");
-	if (state != 0) showError(state);
-
+	if (state != OK) showError(state);
 	state = openFile(secondMatrixFile, "secondMatrixFile.txt", "r");
-	if (state != 0) showError(state);
-
-	state = openFile(outputFile, "resultMatrixFile.txt", "w");
-	if (state != 0) showError(state);
+	if (state != OK) showError(state);
+	state = openFile(outputFile, "resultMatrix.txt", "w");
+	if (state != OK) showError(state);
 
 	//Okreœlenie d³ugoœci wierszy i kolumn
-	fscanf(firstMatrixFile, "%d", &FMRows);
-	fscanf(firstMatrixFile, "%d", &FMColumns);
-	fscanf(secondMatrixFile, "%d", &SMRows);
-	fscanf(secondMatrixFile, "%d", &SMColumns);
+	state = getRowsAndColSize(firstMatrixFile, secondMatrixFile, &FMRows, &FMColumns, &SMRows, &SMColumns);
+	if (state != OK) showError(state);
 
 	//Alokacja pamiêci
 	//First matrix
