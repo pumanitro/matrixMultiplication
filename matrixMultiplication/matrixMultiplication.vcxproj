@@ -141,6 +141,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ErrorCodes.h" />
     <ClInclude Include="ErrorMSG.h" />
     <ClInclude Include="Functions.h" />
     <ClInclude Include="stdafx.h" />

@@ -1,13 +1,28 @@
 #pragma once
+
+#include "ErrorMSG.h"
+#include "ErrorCodes.h"
+
 using namespace std;
 
-//0 - podanych macierzy nie mo¿na pomno¿yæ
-//1 - wszystko posz³o zgodnie z planem - macierz pomno¿ona
+void showError(int state)
+{
+	switch (state)
+	{
+		case ERR_OPENING_FILE:
+			std:cout << ERR_MSG_OPENING_FILE << endl;
+			break;
+
+	}
+}
+
+//-2 - podanych macierzy nie mo¿na pomno¿yæ
+//0 - wszystko posz³o zgodnie z planem - macierz pomno¿ona
 //RM - ResultMatrix
 int matrixMultiplication(float **firstMatrix, float **secondMatrix, int FMRows, int FMColumns, int SMRows, int SMColumns, float **&resultMatrix, int *RMRows, int *RMColumns)
 {
 	//Sprawdzenie czy macierze mo¿na mno¿yæ
-	if (FMColumns != SMRows) return 0;
+	if (FMColumns != SMRows) return -2;
 
 	//Stworzenie wymiarów nowej macierzy
 	*RMRows = FMRows;
@@ -40,17 +55,13 @@ int matrixMultiplication(float **firstMatrix, float **secondMatrix, int FMRows, 
 		printf("\n");
 	}
 
-	return 1;
+	return 0;
 }
 
-//0-B³¹d wewn¹trz funkcji
-//1-Poprawnie zakoñczona funkcja
-//ErrorCode - -1 - Nie mogê utworzyæ pliku
+//0-Poprawnie zakoñczona funkcja
+//ErrorCode - -1 - Nie mogê otworzyæ pliku
 int openFile(FILE *&file, char name[], char type[])
 {
-	if ((file = fopen(name, type)) == NULL) {
-		std::cout << "I can't open a file " << name << endl;
-		return(0);
-	}
-	return(1);
+	if ((file = fopen(name, type)) == NULL) return(-1);
+	return(0);
 }

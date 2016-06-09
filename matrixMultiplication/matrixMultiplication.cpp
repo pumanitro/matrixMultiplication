@@ -7,6 +7,8 @@
 #include <string>
 #include <iostream>
 #include "Functions.h"
+#include "ErrorMSG.h"
+#include "ErrorCodes.h"
 
 using namespace std;
 
@@ -20,10 +22,18 @@ int main()
 	//Zmienne do danych z plików {FM - FirstMatrix | SM - SecondMatrix}
 	int FMRows=0, FMColumns=0, SMRows=0, SMColumns=0;
 
+	//Deklaracja stanu dla sprawdzania errorCodes
+	int state;
+
 	//Otwarcie plików 
-	openFile(firstMatrixFile, "firstMatrixFile.txt", "r");
-	openFile(secondMatrixFile, "secondMatrixFile.txt", "r");
-	openFile(outputFile, "resultMatrixFile.txt", "w");
+	state = openFile(firstMatrixFile, "firstMatrixFile.txt", "r");
+	if (state != 0) showError(state);
+
+	state = openFile(secondMatrixFile, "secondMatrixFile.txt", "r");
+	if (state != 0) showError(state);
+
+	state = openFile(outputFile, "resultMatrixFile.txt", "w");
+	if (state != 0) showError(state);
 
 	//Okreœlenie d³ugoœci wierszy i kolumn
 	fscanf(firstMatrixFile, "%d", &FMRows);
