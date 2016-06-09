@@ -69,25 +69,16 @@ int main()
 
 	//Zwolnienie pamiêci
 	//First matrix
-	for (int i = 0; i < FMRows; i++)
-	{
-		free(firstMatrix[i]);
-	}
-	free(firstMatrix);
+	state = freeMatrixMemory(firstMatrix, FMRows);
+	if(state != OK) showError(state);
 
 	//Second matrix
-	for (int i = 0; i < SMRows; i++)
-	{
-		free(secondMatrix[i]);
-	}
-	free(secondMatrix);
+	state = freeMatrixMemory(secondMatrix, SMRows);
+	if (state != OK) showError(state);
 
 	//Output matrix
-	for (int i = 0; i < RMRows; i++)
-	{
-		free(resultMatrix[i]);
-	}
-	free(resultMatrix);
+	state = freeMatrixMemory(resultMatrix, RMRows);
+	if (state != OK) showError(state);
 
 	//Zamkniêcie plików
 	fclose(firstMatrixFile);

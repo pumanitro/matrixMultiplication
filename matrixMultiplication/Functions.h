@@ -27,6 +27,9 @@ void showError(int state)
 			break; 
 		case ERR_RESULT_ARRAY_TO_FILE:
 			std::cout << endl << ERR_MSG_RESULT_ARRAY_TO_FILE << endl;
+			break; 
+		case ERR_FREE_MATRIX_MEMORY:
+			std::cout << endl << ERR_MSG_FREE_MATRIX_MEMORY << endl;
 			break;
 		default:
 			std::cout << endl << "UNEXPECTED ERROR!" << endl;
@@ -126,6 +129,8 @@ int matrixMultiplication(float **firstMatrix, float **secondMatrix, int FMRows, 
 	return 0;
 }
 
+//0 - wszystko posz³o zgodnie z planem - macierz pomno¿ona
+//ErrorCode - -6 - Problem z w³o¿eniem danych do pliku
 int resultArrayToFile(FILE *outputFile, float **matrix, int rowNumber, int colNumber)
 {
 	try
@@ -149,5 +154,24 @@ int resultArrayToFile(FILE *outputFile, float **matrix, int rowNumber, int colNu
 		return(-6);
 	}
 
+	return(0);
+}
+
+//0 - wszystko posz³o zgodnie z planem - macierz pomno¿ona
+//ErrorCode - -7 - Problem ze zwolnieniem pamiêci
+int freeMatrixMemory(float **&matrix, int rowNumber)
+{
+	try
+	{
+		for (int i = 0; i < rowNumber; i++)
+		{
+			free(matrix[i]);
+		}
+		free(matrix);
+	}
+	catch (const std::exception&)
+	{
+		return(-7);
+	}
 	return(0);
 }

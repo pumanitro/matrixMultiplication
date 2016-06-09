@@ -6,3 +6,4 @@
 #define ERR_MSG_NOT_ENOUGHT_DATA_IN_MATRIX_FILE "Not enought data in matrix file"
 #define ERR_MSG_MATRIX_MULTIPLICATION "I can't multiplicate given matrices"
 #define ERR_MSG_RESULT_ARRAY_TO_FILE "I had problems with putting result array to file"
+#define ERR_MSG_FREE_MATRIX_MEMORY "I had problems with free matrix memory"
