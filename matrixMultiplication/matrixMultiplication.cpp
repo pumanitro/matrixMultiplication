@@ -64,22 +64,8 @@ int main()
 	if (state != OK) showError(state);
 
 	//Zapisanie wyniku do pliku
-	//Wpisanie wymiarów macierzy do pliku
-	fprintf(outputFile, "%d ", RMRows);
-	fprintf(outputFile, "%d\n", RMColumns);
-
-	//Zapisanie zawartoœæ macierzy
-	for (int i = 0; i < RMRows; i++)
-	{
-		for (int j = 0; j < RMColumns; j++)
-		{
-			//TODO: THIS PART DONT WORK
-			fprintf(outputFile, "%.2f ", resultMatrix[i][j]);
-		}
-		fprintf(outputFile, "\n");
-	}
-
-	//fprintf(fp, "%s", tekst); /* zapisz nasz ³añcuch w pliku */
+	state = resultArrayToFile(outputFile, resultMatrix, RMRows, RMColumns);
+	if (state != OK) showError(state);
 
 	//Zwolnienie pamiêci
 	//First matrix

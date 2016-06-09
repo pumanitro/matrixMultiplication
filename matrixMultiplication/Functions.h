@@ -2,6 +2,7 @@
 
 #include "ErrorMSG.h"
 #include "ErrorCodes.h"
+#include <vector>
 
 using namespace std;
 
@@ -23,7 +24,14 @@ void showError(int state)
 			break; 
 		case ERR_MATRIX_MULTIPLICATION:
 			std::cout << endl << ERR_MSG_MATRIX_MULTIPLICATION << endl;
+			break; 
+		case ERR_RESULT_ARRAY_TO_FILE:
+			std::cout << endl << ERR_MSG_RESULT_ARRAY_TO_FILE << endl;
 			break;
+		default:
+			std::cout << endl << "UNEXPECTED ERROR!" << endl;
+			break;
+
 	}
 }
 
@@ -116,4 +124,30 @@ int matrixMultiplication(float **firstMatrix, float **secondMatrix, int FMRows, 
 	}
 
 	return 0;
+}
+
+int resultArrayToFile(FILE *outputFile, float **matrix, int rowNumber, int colNumber)
+{
+	try
+	{
+		//Wpisanie wymiarów macierzy do pliku
+		fprintf(outputFile, "%d ", rowNumber);
+		fprintf(outputFile, "%d\n", colNumber);
+
+		//Zapisanie zawartoœæ macierzy
+		for (int i = 0; i < rowNumber; i++)
+		{
+			for (int j = 0; j < colNumber; j++)
+			{
+				fprintf(outputFile, "%.2f ", matrix[i][j]);
+			}
+			fprintf(outputFile, "\n");
+		}
+	}
+	catch (const std::exception&)
+	{
+		return(-6);
+	}
+
+	return(0);
 }
