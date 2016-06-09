@@ -14,7 +14,10 @@ void showError(int state)
 			break;
 		case ERR_GETING_ROWS_COLS_SIZE:
 			std::cout << ERR_MSG_GETING_ROWS_COLS_SIZE << endl;
-				break;
+				break; 
+		case ERR_MATRIX_ALOCATION:
+			std::cout << ERR_MSG_MATRIX_ALOCATION << endl;
+			break;
 	}
 }
 
@@ -78,4 +81,20 @@ int getRowsAndColsSize(FILE *firstMatrixFile, FILE *secondMatrixFile, int *FMRow
 	if (fscanf(secondMatrixFile, "%d", SMColumns) == EOF) return(-2);
 
 	return(0);
+}
+
+//0-Poprawnie zakoñczona funkcja
+//ErrorCode - -3 - Problem z alokacj¹ pamiêci dla macierzy 
+int matrixMemoryAlocation(float **&matrix, int rowNumber, int colNumber)
+{
+	try {
+		matrix = (float **)malloc(rowNumber*sizeof(float *));
+		for (int i = 0; i < rowNumber; i++)
+		{
+			matrix[i] = (float *)malloc(colNumber*sizeof(float));
+		}
+	}
+	catch (...) { return(-3); }
+
+	return 0;
 }

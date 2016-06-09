@@ -39,19 +39,10 @@ int main()
 	if (state != OK) showError(state);
 
 	//Alokacja pamiêci
-	//First matrix
-	float **firstMatrix = (float **)malloc(FMRows*sizeof(float *));
-	for (int i = 0; i < FMRows; i++)
-	{
-		firstMatrix[i] = (float *)malloc(FMColumns*sizeof(float));
-	}
+	float **firstMatrix = 0, **secondMatrix = 0;
 
-	//Second matrix
-	float **secondMatrix = (float **)malloc(SMRows*sizeof(float *));
-	for (int i = 0; i < SMRows; i++)
-	{
-		secondMatrix[i] = (float *)malloc(SMColumns*sizeof(float));
-	}
+	matrixMemoryAlocation(firstMatrix,FMRows,FMColumns);
+	matrixMemoryAlocation(secondMatrix, SMRows, SMColumns);
 
 	//Czytanie po ca³ych plikach i zapisanie danych do odpowiednich tablic
 	//First Matrix
