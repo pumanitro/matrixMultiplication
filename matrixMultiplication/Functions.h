@@ -20,50 +20,11 @@ void showError(int state)
 			break; 
 		case ERR_NOT_ENOUGHT_DATA_IN_MATRIX_FILE:
 			std::cout << endl << ERR_MSG_NOT_ENOUGHT_DATA_IN_MATRIX_FILE << endl;
+			break; 
+		case ERR_MATRIX_MULTIPLICATION:
+			std::cout << endl << ERR_MSG_MATRIX_MULTIPLICATION << endl;
 			break;
 	}
-}
-
-//-2 - podanych macierzy nie mo¿na pomno¿yæ
-//0 - wszystko posz³o zgodnie z planem - macierz pomno¿ona
-//RM - ResultMatrix
-int matrixMultiplication(float **firstMatrix, float **secondMatrix, int FMRows, int FMColumns, int SMRows, int SMColumns, float **&resultMatrix, int *RMRows, int *RMColumns)
-{
-	//Sprawdzenie czy macierze mo¿na mno¿yæ
-	if (FMColumns != SMRows) return -2;
-
-	//Stworzenie wymiarów nowej macierzy
-	*RMRows = FMRows;
-	*RMColumns = SMColumns;
-
-	//Alokacja pamiêci nowej macierzy
-	resultMatrix = (float **)malloc(*RMRows*sizeof(float *));
-	for (int i = 0; i < *RMRows; i++)
-	{
-		resultMatrix[i] = (float *)malloc(*RMColumns*sizeof(float));
-	}
-
-	//Przypisanie wartoœci do zaalokowanej tablicy
-	printf("\nResult matrix:\n");
-	int link = FMColumns;
-	float out;
-
-	for (int i = 0; i < *RMRows; i++)
-	{
-		for (int j = 0; j < *RMColumns; j++)
-		{
-			out = 0;
-			for (int x = 0; x < link; x++)
-			{
-				out += firstMatrix[i][x] * secondMatrix[x][j];
-			}
-			resultMatrix[i][j] = out;
-			printf("%.2f ", resultMatrix[i][j]);
-		}
-		printf("\n");
-	}
-
-	return 0;
 }
 
 //0-Poprawnie zakoñczona funkcja
@@ -117,4 +78,42 @@ int matrixFromFileToArray(FILE *file, float **matrix, int rowNumber, int colNumb
 	}
 
 	return(0);
+}
+
+//0 - wszystko posz³o zgodnie z planem - macierz pomno¿ona
+//ErrorCode - -3 - Problem z alokacj¹ pamiêci dla macierzy 
+//ErrorCode - -5 - Podanych macierzy nie mo¿na pomno¿yæ
+int matrixMultiplication(float **firstMatrix, float **secondMatrix, int FMRows, int FMColumns, int SMRows, int SMColumns, float **&resultMatrix, int *RMRows, int *RMColumns)
+{
+	//Sprawdzenie czy macierze mo¿na mno¿yæ
+	if (FMColumns != SMRows) return(-5);
+
+	//Stworzenie wymiarów nowej macierzy
+	*RMRows = FMRows;
+	*RMColumns = SMColumns;
+
+	//Alokacja pamiêci nowej macierzy
+	int state = matrixMemoryAlocation(resultMatrix, *RMRows, *RMColumns);
+	if (state != 0) return(state);
+
+	//Przypisanie wartoœci do zaalokowanej tablicy
+	int link = FMColumns;
+	float out;
+
+	for (int i = 0; i < *RMRows; i++)
+	{
+		for (int j = 0; j < *RMColumns; j++)
+		{
+			out = 0;
+			for (int x = 0; x < link; x++)
+			{
+				out += firstMatrix[i][x] * secondMatrix[x][j];
+			}
+			resultMatrix[i][j] = out;
+			printf("%.2f ", resultMatrix[i][j]);
+		}
+		printf("\n");
+	}
+
+	return 0;
 }

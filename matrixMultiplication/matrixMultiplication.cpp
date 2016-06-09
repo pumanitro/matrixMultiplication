@@ -58,7 +58,10 @@ int main()
 	//MNO¯ENIE
 	float **resultMatrix = 0;
 	int RMRows = 0, RMColumns = 0;
-	matrixMultiplication(firstMatrix, secondMatrix, FMRows, FMColumns, SMRows, SMColumns, resultMatrix, &RMRows, &RMColumns);
+	printf("\nResult matrix:\n");
+
+	state = matrixMultiplication(firstMatrix, secondMatrix, FMRows, FMColumns, SMRows, SMColumns, resultMatrix, &RMRows, &RMColumns);
+	if (state != OK) showError(state);
 
 	//Zapisanie wyniku do pliku
 	//Wpisanie wymiarów macierzy do pliku
