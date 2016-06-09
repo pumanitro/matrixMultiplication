@@ -15,7 +15,7 @@ void showError(int state)
 			break;
 		case ERR_GETING_ROWS_COLS_SIZE:
 			std::cout << endl << ERR_MSG_GETING_ROWS_COLS_SIZE << endl;
-				break; 
+			break; 
 		case ERR_MATRIX_ALOCATION:
 			std::cout << endl << ERR_MSG_MATRIX_ALOCATION << endl;
 			break; 
@@ -34,8 +34,8 @@ void showError(int state)
 		default:
 			std::cout << endl << "UNEXPECTED ERROR!" << endl;
 			break;
-
 	}
+	system("pause");
 }
 
 //0-Poprawnie zakoñczona funkcja
