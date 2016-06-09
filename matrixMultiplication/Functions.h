@@ -70,18 +70,12 @@ int openFile(FILE *&file, char name[], char type[])
 
 //0-Poprawnie zakoñczona funkcja
 //ErrorCode - -2 - Nie mogê prawid³owo odczytaæ kolumn lub wierszy
-int getRowsAndColSize(FILE *firstMatrixFile, FILE *secondMatrixFile, int *FMRows, int *FMColumns, int *SMRows, int *SMColumns)
+int getRowsAndColsSize(FILE *firstMatrixFile, FILE *secondMatrixFile, int *FMRows, int *FMColumns, int *SMRows, int *SMColumns)
 {
-	try {
-		fscanf(firstMatrixFile, "%d", FMRows);
-		fscanf(firstMatrixFile, "%d", FMColumns);
-		fscanf(secondMatrixFile, "%d", SMRows);
-		fscanf(secondMatrixFile, "%d", SMColumns);
-	}
-	catch (...) 
-	{ 
-		return(-2); 
-	}
+	if (fscanf(firstMatrixFile, "%d", FMRows) == EOF ) return(-2);
+	if (fscanf(firstMatrixFile, "%d", FMColumns) == EOF) return(-2);
+	if (fscanf(secondMatrixFile, "%d", SMRows) == EOF) return(-2);
+	if (fscanf(secondMatrixFile, "%d", SMColumns) == EOF) return(-2);
 
 	return(0);
 }

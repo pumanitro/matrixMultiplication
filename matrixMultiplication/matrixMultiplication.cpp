@@ -35,7 +35,7 @@ int main()
 	if (state != OK) showError(state);
 
 	//Okreœlenie d³ugoœci wierszy i kolumn
-	state = getRowsAndColSize(firstMatrixFile, secondMatrixFile, &FMRows, &FMColumns, &SMRows, &SMColumns);
+	state = getRowsAndColsSize(firstMatrixFile, secondMatrixFile, &FMRows, &FMColumns, &SMRows, &SMColumns);
 	if (state != OK) showError(state);
 
 	//Alokacja pamiêci
