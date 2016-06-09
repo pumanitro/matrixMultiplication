@@ -10,8 +10,8 @@
 #include "ErrorMSG.h"
 #include "ErrorCodes.h"
 
-using namespace std;
 #define OK 0
+using namespace std;
 
 int main()
 {
@@ -41,33 +41,19 @@ int main()
 	//Alokacja pamiêci
 	float **firstMatrix = 0, **secondMatrix = 0;
 
-	matrixMemoryAlocation(firstMatrix,FMRows,FMColumns);
-	matrixMemoryAlocation(secondMatrix, SMRows, SMColumns);
+	state = matrixMemoryAlocation(firstMatrix,FMRows,FMColumns);
+	if (state != OK) showError(state);
+	state = matrixMemoryAlocation(secondMatrix, SMRows, SMColumns);
+	if (state != OK) showError(state);
 
 	//Czytanie po ca³ych plikach i zapisanie danych do odpowiednich tablic
-	//First Matrix
 	printf("First matrix:\n");
-	for (int i = 0; i < FMRows; i++)
-	{
-		for (int j = 0; j < FMColumns; j++)
-		{
-			fscanf(firstMatrixFile, "%f", &firstMatrix[i][j]);
-			printf("%.2f ", firstMatrix[i][j]);
-		}
-		printf("\n");
-	}
+	state = matrixFromFileToArray(firstMatrixFile, firstMatrix, FMRows, FMColumns);
+	if (state != OK) showError(state);
 
-	//Second Matrix
 	printf("\nSecond matrix:\n");
-	for (int i = 0; i < SMRows; i++)
-	{
-		for (int j = 0; j < SMColumns; j++)
-		{
-			fscanf(secondMatrixFile, "%f", &secondMatrix[i][j]);
-			printf("%.2f ", secondMatrix[i][j]);
-		}
-		printf("\n");
-	}
+	state = matrixFromFileToArray(secondMatrixFile, secondMatrix, SMRows, SMColumns);
+	if (state != OK) showError(state);
 
 	//MNO¯ENIE
 	float **resultMatrix = 0;

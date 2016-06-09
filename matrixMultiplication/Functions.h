@@ -10,13 +10,16 @@ void showError(int state)
 	switch (state)
 	{
 		case ERR_OPENING_FILE:
-			std::cout << ERR_MSG_OPENING_FILE << endl;
+			std::cout << endl << ERR_MSG_OPENING_FILE << endl;
 			break;
 		case ERR_GETING_ROWS_COLS_SIZE:
-			std::cout << ERR_MSG_GETING_ROWS_COLS_SIZE << endl;
+			std::cout << endl << ERR_MSG_GETING_ROWS_COLS_SIZE << endl;
 				break; 
 		case ERR_MATRIX_ALOCATION:
-			std::cout << ERR_MSG_MATRIX_ALOCATION << endl;
+			std::cout << endl << ERR_MSG_MATRIX_ALOCATION << endl;
+			break; 
+		case ERR_NOT_ENOUGHT_DATA_IN_MATRIX_FILE:
+			std::cout << endl << ERR_MSG_NOT_ENOUGHT_DATA_IN_MATRIX_FILE << endl;
 			break;
 	}
 }
@@ -97,4 +100,21 @@ int matrixMemoryAlocation(float **&matrix, int rowNumber, int colNumber)
 	catch (...) { return(-3); }
 
 	return 0;
+}
+
+//0-Poprawnie zakoñczona funkcja
+//ErrorCode - -4 - Niewystarczaj¹ca iloœæ danych w pliku
+int matrixFromFileToArray(FILE *file, float **matrix, int rowNumber, int colNumber)
+{
+	for (int i = 0; i < rowNumber; i++)
+	{
+		for (int j = 0; j < colNumber; j++)
+		{
+			if(fscanf(file, "%f", &matrix[i][j]) == EOF) return(-4);
+			printf("%.2f ", matrix[i][j]);
+		}
+		printf("\n");
+	}
+
+	return(0);
 }
